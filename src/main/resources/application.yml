@@ -1,0 +1,48 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: iespflix
+
+  datasource:
+    url: jdbc:h2:mem:iespflixdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+
+# Configuração de URLs Externas para o Feign Client
+iespflix:
+  integracoes:
+    viacep:
+      url: https://viacep.com.br/ws
+    brasilapi:
+      url: https://brasilapi.com.br/api
+
+# Configuração do Swagger UI
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
